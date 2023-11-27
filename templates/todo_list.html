@@ -1,0 +1,58 @@
+
+{% extends 'main.html' %}
+{% block title %} all posts {% endblock title %}
+
+
+
+{% block content %}
+
+        <div class="container-fluid pt-4">
+                <div class="row pt-3 pb-4">
+                <div class="col">
+                        <a href="{% url 'create' %}" class="btn btn-primary">Create a Post</a>
+                </div>
+                <div class="col d-flex justify-content-end">
+                        <form method="GET">
+                        <div class="form-inline">
+                                <input type="text" name="search-area" value="{{search_input}}" class="form-control">
+                                <input type="submit" class="btn btn-outline-primary ml-2" value="Search">
+                        </div>
+                        </form>
+                </div>
+                </div>
+        </div>
+
+                <ul> 
+
+                        {% for task in tasks reversed %}
+                        <div class="card-body ">
+                        <h5><li class="card-title">{{task}}</li></h5>
+                        <p class="card-text">{{ task.description|truncatewords:5 }}</p>
+                        <a href="{% url 'detail' task.pk %}" class="btn btn-outline-primary">Full task</a>
+                        </div>
+                                <div class="card-footer text-center text-muted bg-red">        
+                                        <a href="{% url 'update' task.id %}">Update post</a> |
+                                        <a href="{% url 'delete' task.pk %}">Delete post</a>
+                                        <span class="text-muted">by {{ task.user.username }} |
+                                                {{ task.create }}</span>
+                                </div>
+
+                        <br><br>
+                        
+                        {% empty %}
+                        <h3>Empty list</h3>
+                        <p>No post exist.</p>
+                
+                        {% endfor %}
+                        {% include 'pagination.html' %}
+                        
+                    
+                        
+                </ul>
+                
+                    
+        </div>
+
+        
+
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% block title %}update post{% endblock title %}
+
+{% block content %}
+    <a href="{% url 'update' task.id %}">Update post</a>
+
+    <form action="" method="post">
+        {% csrf_token%}
+        {{ form|crispy }}
+        <input type="submit" value="Update">
+    </form>
+    
+{% endblock content %}
+

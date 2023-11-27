@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+
+{% block title %}delete post{% endblock title %}
+
+
+{% block content %}
+
+
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete {{ task }}?</p>
+        <input type="submit" value="Delete" class="btn btn-outline-danger">
+    </form>
+    <br><br>
+    <h5>If not, <a href="{% url 'task' %}" >Go back</a></h5>
+
+
+{% endblock content %}
+
+
